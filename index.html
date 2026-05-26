@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subscription Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Subscription Tracker</h1>
+    <div class="currency-wrap">
+      <label for="currency">Currency</label>
+      <select id="currency">
+        <option value="USD">USD $</option>
+        <option value="EUR">EUR €</option>
+        <option value="GBP">GBP £</option>
+        <option value="JPY">JPY ¥</option>
+        <option value="AUD">AUD $</option>
+        <option value="CAD">CAD $</option>
+        <option value="INR">INR ₹</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary">
+      <div class="card">
+        <span class="card-label">Monthly</span>
+        <span class="card-value" id="totalMonthly">0.00</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Yearly</span>
+        <span class="card-value" id="totalYearly">0.00</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Active</span>
+        <span class="card-value" id="totalCount">0</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Next 30 days</span>
+        <span class="card-value" id="totalUpcoming">0.00</span>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <h2 id="formTitle">Add subscription</h2>
+      <form id="subForm">
+        <input type="hidden" id="editId" />
+        <div class="grid">
+          <label>
+            Name
+            <input type="text" id="name" placeholder="Netflix" required />
+          </label>
+          <label>
+            Amount
+            <input type="number" id="amount" step="0.01" min="0" placeholder="9.99" required />
+          </label>
+          <label>
+            Billing cycle
+            <select id="cycle">
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+              <option value="weekly">Weekly</option>
+              <option value="quarterly">Quarterly</option>
+            </select>
+          </label>
+          <label>
+            Category
+            <select id="category">
+              <option value="Entertainment">Entertainment</option>
+              <option value="Productivity">Productivity</option>
+              <option value="Music">Music</option>
+              <option value="News">News</option>
+              <option value="Cloud / Storage">Cloud / Storage</option>
+              <option value="Software">Software</option>
+              <option value="Fitness">Fitness</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label>
+            Next billing date
+            <input type="date" id="nextDate" />
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submitBtn">Add</button>
+          <button type="button" id="cancelBtn" class="secondary hidden">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <div class="list-header">
+        <h2>Your subscriptions</h2>
+        <div class="filters">
+          <input type="search" id="search" placeholder="Search..." />
+          <select id="filterCategory">
+            <option value="">All categories</option>
+          </select>
+          <select id="sortBy">
+            <option value="name">Sort: Name</option>
+            <option value="monthly-desc">Sort: Monthly (high → low)</option>
+            <option value="monthly-asc">Sort: Monthly (low → high)</option>
+            <option value="next">Sort: Next billing</option>
+          </select>
+        </div>
+      </div>
+      <div id="emptyState" class="empty">No subscriptions yet. Add one above to get started.</div>
+      <ul id="subList"></ul>
+    </section>
+
+    <section class="breakdown">
+      <h2>By category (monthly)</h2>
+      <div id="categoryBreakdown" class="bars"></div>
+    </section>
+
+    <section class="data-tools">
+      <button id="exportBtn" class="secondary">Export JSON</button>
+      <label class="secondary file-label">
+        Import JSON
+        <input type="file" id="importInput" accept="application/json" hidden />
+      </label>
+      <button id="clearBtn" class="danger">Clear all</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
